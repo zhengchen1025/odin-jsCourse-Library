@@ -1,3 +1,10 @@
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector("dialog + button");
+const closeButton = document.querySelector("dialog button");
+const confirmBtn = document.querySelector("#confirmBtn");
+const form = document.querySelector(".newBookForm");
+const bookshelfDiv = document.getElementById("bookshelf");
+
 const myLibrary = [
   {
     author: "Emily Bronte",
@@ -36,6 +43,8 @@ const myLibrary = [
   },
 ];
 
+updateBookshelf();
+
 function Book(author, title, numberOfPages, hasBeenRead, coverImage) {
   (this.author = author),
     (this.coverImage = coverImage),
@@ -45,50 +54,89 @@ function Book(author, title, numberOfPages, hasBeenRead, coverImage) {
 }
 
 function addBookToLibrary() {
-  // do stuff here
+    const newBook = new Book(
+      document.getElementById("newAuthor").value,
+      document.getElementById("newTitle").value,
+      document.getElementById("newNumberOfPages").value,
+      document.querySelector('input[name="readStatus"]:checked').id === 'newHasBeenRead',
+      `${document.getElementById("newCoverImage").value}.png`
+    );
+    myLibrary.push(newBook);
+    
+    updateBookshelf();
+    form.reset();
+    dialog.close();
+  }
+
+function updateBookshelf() {
+  bookshelfDiv.innerHTML = "";
+  myLibrary.forEach((book) => {
+    const bookElement = document.createElement("div");
+    bookElement.classList.add("book");
+
+    const coverImageElement = document.createElement("img");
+    coverImageElement.src = `image/${book.coverImage}`;
+    coverImageElement.alt = `${book.title} cover image`;
+    coverImageElement.classList.add("cover-image");
+
+    const authorElement = document.createElement("h4");
+    authorElement.textContent = book.author;
+
+    const titleElement = document.createElement("h3");
+    titleElement.textContent = book.title;
+
+    const pagesElement = document.createElement("p");
+    pagesElement.textContent = `Pages: ${book.numberOfPages}`;
+
+    const readStatusElement = document.createElement("p");
+    readStatusElement.textContent = book.hasBeenRead ? "Read" : "Unread";
+    readStatusElement.classList.add(
+      book.hasBeenRead ? "read-status-read" : "read-status-unread"
+    );
+
+    bookElement.appendChild(coverImageElement);
+    bookElement.appendChild(authorElement);
+    bookElement.appendChild(titleElement);
+    bookElement.appendChild(pagesElement);
+    bookElement.appendChild(readStatusElement);
+
+    bookshelfDiv.appendChild(bookElement);
+  });
 }
 
-const bookshelfDiv = document.getElementById("bookshelf");
 
-myLibrary.forEach((book) => {
-  const bookElement = document.createElement("div");
-  bookElement.classList.add("book");
-
-  const coverImageElement = document.createElement("img");
-  coverImageElement.src = `image/${book.coverImage}`;
-  coverImageElement.alt = `${book.title} cover image`;
-  coverImageElement.classList.add("cover-image");
-
-  const authorElement = document.createElement("h4");
-  authorElement.textContent = book.author;
-
-  const titleElement = document.createElement("h3");
-  titleElement.textContent = book.title;
-
-  const pagesElement = document.createElement("p");
-  pagesElement.textContent = `Pages: ${book.numberOfPages}`;
-
-  const readStatusElement = document.createElement("p");
-  readStatusElement.textContent = book.hasBeenRead ? "Read" : "Unread";
-  readStatusElement.classList.add(book.hasBeenRead ? "read-status-read" : "read-status-unread");
-
-  bookElement.appendChild(coverImageElement);
-  bookElement.appendChild(authorElement);
-  bookElement.appendChild(titleElement);
-  bookElement.appendChild(pagesElement);
-  bookElement.appendChild(readStatusElement);
-
-  bookshelfDiv.appendChild(bookElement);
-});
-
-const dialog = document.querySelector("dialog");
-const showButton = document.querySelector("dialog + button");
-const closeButton = document.querySelector("dialog button");
 
 showButton.addEventListener("click", () => {
-    dialog.showModal();
-  });
-  
-  closeButton.addEventListener("click", () => {
-    dialog.close();
-  });
+  dialog.showModal();
+});
+
+closeButton.addEventListener("click", () => {
+  dialog.close();
+});
+
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const selectedRadio = document.querySelector('input[name="readStatus"]:checked');
+
+
+  const author = document.getElementById("newAuthor").value;
+  const title = document.getElementById("newTitle").value;
+  const pages = document.getElementById("newNumberOfPages").value;
+  const read = selectedRadio.id === 'newHasBeenRead' ? 'Read' : 'Unread';
+  const cover = document.getElementById("newCoverImage").value;
+
+  const newBook = new Book(author, title, pages, read, cover);
+
+  addBookToLibrary();
+  console.log(myLibrary);
+});
+
+confirmBtn.addEventListener("click", () => {
+  addBookToLibrary();
+});
+
+function showSelectedImage() {
+  const selectedOption = document.getElementById("newCoverImage").value;
+  const imageElement = document.getElementById("selectedImage");
+  imageElement.src = `image/${selectedOption}.png`;
+}

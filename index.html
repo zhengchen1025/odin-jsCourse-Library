@@ -8,12 +8,66 @@
   </head>
   <body>
     <div class="container">
-      <div class="header"></div>
+      <div class="header">
+        <h2>My Library</h2>
+      </div>
       <div class="bookshelf" id="bookshelf"></div>
       <div class="footer">
-        <dialog>
-          <button autofocus>Close</button>
-          <p>This modal dialog has a groovy backdrop!</p>
+        <dialog class="dialog">
+          <form action="" class="newBookForm">
+            <h2>New Book</h2>
+            <div>
+              <label for="newAuthor">Author: </label>
+              <input type="text" id="newAuthor" autofocus />
+            </div>
+            <div>
+              <label for="newTitle">Title: </label>
+              <input type="text" id="newTitle" />
+            </div>
+            <div>
+              <label for="newNumberOfPages">Number of Pages: </label>
+              <input type="number" id="newNumberOfPages" />
+            </div>
+            <div>
+              <fieldset>
+                <legend>Read Status:</legend>
+                <input
+                  type="radio"
+                  name="readStatus"
+                  id="newHasBeenRead"
+                  checked
+                />
+                <label for="newHasBeenRead">Read</label>
+                <input type="radio" name="readStatus" id="newHasNotBeenRead" />
+                <label for="newHasNotBeenRead">Unread</label>
+              </fieldset>
+            </div>
+            <div id="formImgSelect">
+              <label for="newCoverImage">Cover Image (01-05): </label>
+              <select
+                name="Cover"
+                id="newCoverImage"
+                onchange="showSelectedImage()"
+              >
+                <option value="01" selected>01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+              </select>
+              <img
+                id="selectedImage"
+                src="image/01.png"
+                alt="Selected Image"
+                width="100"
+                height="100"
+              />
+            </div>
+          </form>
+          <div>
+            <button id="closeBtn" value="cancel" autofocus>Close</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+          </div>
         </dialog>
         <button id="newBook">NEW BOOK</button>
       </div>

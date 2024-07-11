@@ -5,8 +5,14 @@ body {
     "Lucida Sans", Arial, sans-serif;
 }
 
+h2 {
+    text-align: center;
+    color: darkcyan;
+    font-weight: 400;
+    
+}
 .container {
-  height: 100vh;
+    height: 100vh;
   width: 100vw;
   background-color: azure;
   display: flex;
@@ -14,21 +20,22 @@ body {
 }
 
 .header {
-  flex-basis: 10%;
+    flex: 0 0 6%;
   background-color: deepskyblue;
 }
 
 .footer {
-  flex-basis: 10%;
+    flex: 0 0 6%;
   background-color: deepskyblue;
+  text-align: center;
 }
 
 .bookshelf {
-  flex-basis: 80%;
-  border: 1px orange solid;
+    flex: 1 1 88%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
+  overflow-y: auto;
 }
 
 .addBook {
@@ -54,11 +61,24 @@ body {
   max-height: 120px;
 }
 
+#newAuthor {
+    width: 15em;
+}
 
+#newTitle {
+    width: 20em;
+}
 .read-status-unread {
   color: red;
   font-style: italic;
 }
+
+.dialog {
+    width: 80%;
+    height: 80%;
+}
+
+
 
 ::backdrop {
     background-image: linear-gradient(
@@ -71,3 +91,55 @@ body {
     opacity: 0.75;
   }
 
+#newBook {
+    margin-top: 1em;
+    border-radius: 1em;
+    width: 10em;
+    height: 2.5em;
+    color: darkcyan;
+    background-color: azure;
+    border-color: darkcyan;
+    box-shadow: none;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.newBookForm {
+    margin: 5px;
+    padding: 5px;
+    font-size: 20px;
+    
+}
+
+.newBookForm > div {
+    margin: 5px;
+    padding: 15px;
+}
+
+#formImgSelect {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    margin-right: 10px;
+}
+
+select {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+#closeBtn, #confirmBtn {
+    font-size: 1.5em;
+    margin: 10px;
+    color: darkcyan;
+    background-color: azure;
+    border-color: darkcyan;
+    box-shadow: none;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+}
