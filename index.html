@@ -18,15 +18,15 @@
             <h2>New Book</h2>
             <div>
               <label for="newAuthor">Author: </label>
-              <input type="text" id="newAuthor" autofocus />
+              <input type="text" id="newAuthor" autofocus required />
             </div>
             <div>
               <label for="newTitle">Title: </label>
-              <input type="text" id="newTitle" />
+              <input type="text" id="newTitle" required />
             </div>
             <div>
               <label for="newNumberOfPages">Number of Pages: </label>
-              <input type="number" id="newNumberOfPages" />
+              <input type="number" id="newNumberOfPages" required />
             </div>
             <div>
               <fieldset>
@@ -63,11 +63,11 @@
                 height="100"
               />
             </div>
+            <div>
+              <button id="closeBtn" value="cancel" autofocus>Close</button>
+              <button id="confirmBtn" type="submit">Confirm</button>
+            </div>
           </form>
-          <div>
-            <button id="closeBtn" value="cancel" autofocus>Close</button>
-            <button id="confirmBtn" value="default">Confirm</button>
-          </div>
         </dialog>
         <button id="newBook">NEW BOOK</button>
       </div>

@@ -126,6 +126,7 @@ closeButton.addEventListener("click", () => {
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
+  
   const selectedRadio = document.querySelector(
     'input[name="readStatus"]:checked'
   );
@@ -143,7 +144,10 @@ form.addEventListener("submit", function (event) {
 });
 
 confirmBtn.addEventListener("click", () => {
-  addBookToLibrary();
+  if (form.validity) {
+    addBookToLibrary();
+  }
+  else return
 });
 
 function showSelectedImage() {
